@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="newspapercount" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67f1159a-3fe9-4b63-b720-ae13e7ce08c1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="129"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="from" class="java.lang.String"/>
+	<parameter name="to" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+
+     newspapers.`Date` AS newspapers_Date,
+     newspapers.`Sinhala_Paper` AS newspapers_Sinhala_Paper,
+     newspapers.`English_Paper` AS newspapers_English_Paper,
+     newspapers.`Ammount` AS newspapers_Ammount,
+     newspapers.`Price` AS newspapers_Price
+FROM
+     `newspapers` newspapers
+WHERE
+     newspapers.`Date` between $P{from} and $P{to}]]>
+	</queryString>
+	<field name="newspapers_Date" class="java.sql.Date"/>
+	<field name="newspapers_Sinhala_Paper" class="java.lang.String"/>
+	<field name="newspapers_English_Paper" class="java.lang.String"/>
+	<field name="newspapers_Ammount" class="java.lang.Integer"/>
+	<field name="newspapers_Price" class="java.lang.Float"/>
+	<variable name="tot" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{newspapers_Price}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="63c9c7b2-011f-421b-9cb3-4adc886639c0" style="Title" x="279" y="0" width="289" height="62"/>
+				<textElement verticalAlignment="Middle">
+					<font size="30" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[NewsPaper Purchase]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a8a27a22-1239-44a4-b348-0254a25ec8bc" x="1" y="101" width="468" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Records between "+
+$P{from}+
+" and "+
+$P{to}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="bbcc76cb-3f70-4a3d-8ccd-2342b06f450a" x="640" y="2" width="151" height="119"/>
+				<imageExpression><![CDATA["F:\\Final 111\\final pro\\systemfinal\\Library_Management_System\\src\\Report\\Picture1.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="6ee28d83-ba42-4e14-984d-b6482591a0b9" positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="660a96c1-f226-43c3-991f-5e661a6f7f2d" style="Column header" x="0" y="0" width="160" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a4f3d1e-f2af-45f3-bedf-8445e2ec8b61" style="Column header" x="160" y="0" width="160" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Sinhala_Paper]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="00349353-c264-4571-9e31-85c0c412ce0a" style="Column header" x="320" y="0" width="160" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[English_Paper]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="312aa3b8-5cee-4232-a869-8fe870b19720" style="Column header" x="480" y="0" width="160" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Ammount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a1cbe242-b34a-48f1-884c-c09daf9c5c5f" style="Column header" x="640" y="0" width="160" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9bdf284b-470e-43f4-bb9e-c92d0dc1cb85" style="Row" mode="Opaque" x="0" y="0" width="802" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="928066c2-7345-4688-a9cb-af3b88bd96a4" style="Detail" x="0" y="0" width="160" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{newspapers_Date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1a909f6e-9371-407c-8794-c3c0c96da580" style="Detail" x="160" y="0" width="160" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{newspapers_Sinhala_Paper}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1388c69b-9e1b-4d31-97ef-a7ff83aff3e2" style="Detail" x="320" y="0" width="160" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{newspapers_English_Paper}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a43b6865-25ec-4ba9-9fca-3280d776ff38" style="Detail" x="480" y="0" width="160" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{newspapers_Ammount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="b0e3173c-ea61-499f-a255-a685e37016c9" style="Detail" x="640" y="0" width="160" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{newspapers_Price}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement uuid="abea764d-227c-4ac4-a534-87dcd0a663b1" positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="cc34a524-9273-4a43-811b-4f44c00465a9" mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="12df1ea4-10cb-44ad-a6b4-1c406c7a5b2b" style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="894009d8-dabc-4125-ba91-908eee139f8b" style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="f490d39a-b18a-40ba-8266-9c7750146be2" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ea2b64de-d03f-499b-b18c-b769dec5e7c1" x="620" y="5" width="82" height="20" forecolor="#736343" backcolor="#D0B48E"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Cost]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4e1a938e-f119-4f01-9d9a-331c8b4890f2" x="702" y="5" width="98" height="20" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

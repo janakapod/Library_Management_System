@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CategoryBooks" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a802b54-e68f-4bf7-94a0-2556badf9640">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="author" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     book1.`bookid` AS book1_bookid,
+     book1.`name` AS book1_name,
+     book1.`author` AS book1_author,
+     book1.`isbn` AS book1_isbn,
+     book1.`category` AS book1_category,
+     book1.`addeddate` AS book1_addeddate,
+     book1.`noofpages` AS book1_noofpages,
+     book1.`booktype` AS book1_booktype,
+     book1.`price` AS book1_price,
+     book1.`shelfno` AS book1_shelfno,
+     book1.`statues` AS book1_statues
+FROM
+     `book1` book1
+WHERE
+     author = $P{author}]]>
+	</queryString>
+	<field name="book1_bookid" class="java.lang.String"/>
+	<field name="book1_name" class="java.lang.String"/>
+	<field name="book1_author" class="java.lang.String"/>
+	<field name="book1_isbn" class="java.lang.String"/>
+	<field name="book1_category" class="java.lang.String"/>
+	<field name="book1_addeddate" class="java.sql.Date"/>
+	<field name="book1_noofpages" class="java.lang.Integer"/>
+	<field name="book1_booktype" class="java.lang.String"/>
+	<field name="book1_price" class="java.lang.Double"/>
+	<field name="book1_shelfno" class="java.lang.Integer"/>
+	<field name="book1_statues" class="java.lang.String"/>
+	<variable name="count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{book1_bookid}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c2824990-7135-4ff7-929c-3789e9716fb8" style="Title" x="260" y="0" width="263" height="62" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Books]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e4432a82-5915-4278-ae32-ce0e2e67d532" style="SubTitle" x="270" y="62" width="153" height="32"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Books of Author :-]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="369c9faf-0f88-4010-a613-84c0c5882abc" style="SubTitle" x="423" y="62" width="100" height="32" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{author}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="bbcc76cb-3f70-4a3d-8ccd-2342b06f450a" x="638" y="10" width="151" height="119"/>
+				<imageExpression><![CDATA["F:\\Final 111\\final pro\\systemfinal\\Library_Management_System\\src\\Report\\Picture1.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="efbc7919-db51-4199-8b10-2a3fcae037b4" positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="31c34f88-aa54-443b-bcbd-9fb949af1026" style="Column header" x="0" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Book ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7139f1b-c76a-4fdb-a8aa-30f94374d983" style="Column header" x="72" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23b6d270-1e41-4f8d-a4f6-75853c05b7da" style="Column header" x="144" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Author]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e1d22912-6a53-4f21-ae94-45226c3d11c0" style="Column header" x="216" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="861c6f84-4dc5-4072-88a5-3272fbf1604d" style="Column header" x="288" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="560c1b8f-7c0c-4204-9778-03ac2bb855c0" style="Column header" x="360" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Added date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="10df8158-61ee-4fb8-b2e0-63bb14e48719" style="Column header" x="432" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[No of pages]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b660bec7-c4f6-4965-939c-cc1fffec04dd" style="Column header" x="504" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[BookType]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fc457b2c-1021-4ec6-aea7-969af2f1f6d0" style="Column header" x="576" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="37f44f3c-fcf2-421d-aad9-a1fc316e1b31" style="Column header" x="648" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Shelf No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1163090c-f8e2-4cdd-a977-3dc056a10386" style="Column header" x="720" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Statues]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="2e064fdd-9520-40f4-bdd3-325b7e212939" style="Row" mode="Opaque" x="0" y="0" width="802" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d55a10d4-795b-47b3-b380-a84b70bbe0a4" style="Detail" x="0" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_bookid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ac2fc7f6-c348-4970-b74e-d8aad35c528d" style="Detail" x="72" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="b1ab339b-9c4f-46a7-86b1-a84e537e39fc" style="Detail" x="144" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_author}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="8d76ee9c-40ab-4454-bc4d-55601741eca8" style="Detail" x="216" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_isbn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="aeba2564-4197-4b5f-9d54-b64826f76b51" style="Detail" x="288" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_category}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="f5da2cc3-fe4e-4f0d-93b7-1edfe2cf5d94" style="Detail" x="360" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy/MM/dd").format($F{book1_addeddate})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5289f8e2-9996-497f-b260-47479ba43e28" style="Detail" x="432" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_noofpages}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5eba79db-1a40-4d0c-bd89-4e2541a46d1e" style="Detail" x="504" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_booktype}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c58c3906-0710-4390-b34c-4a0bd6c2f7b1" style="Detail" x="576" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_price}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="f4042c65-d559-4dd5-94a0-d86723f55ce4" style="Detail" x="648" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_shelfno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5c1fe845-aed3-4bcf-b34d-c42ee76a983b" style="Detail" x="720" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{book1_statues}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement uuid="68c5a4d1-d996-461f-bc12-a6608b26c4cb" positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="d9a53d5f-1cbf-427a-b5ea-c8e5c47ecc02" mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="df96352c-2a3a-4be6-9cd5-c43c161cb9bc" style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="cd299851-d221-4bd1-9385-792796759f4c" style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="1b11905f-6aaf-48b0-9f91-c33cb353904d" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4efc1c14-fe7e-4cd8-9500-d6a94fe9670a" x="545" y="5" width="175" height="20" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Number of Books =]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="52ec2507-97d1-4b40-9341-7ae30ed511d8" x="720" y="5" width="100" height="20" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

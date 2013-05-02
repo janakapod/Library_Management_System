@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AllTeachers" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fc5f6170-7d0c-4911-900d-e354cbdf4e0c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="131"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     teacher.`TmemberID` AS teacher_TmemberID,
+     teacher.`Fname` AS teacher_Fname,
+     teacher.`Lname` AS teacher_Lname,
+     teacher.`Address` AS teacher_Address,
+     teacher.`DateOfBirth` AS teacher_DateOfBirth,
+     teacher.`DateOfRegistration` AS teacher_DateOfRegistration,
+     teacher.`Gender` AS teacher_Gender,
+     teacher.`Email` AS teacher_Email,
+     teacher.`ContactNumber` AS teacher_ContactNumber,
+     teacher.`Subject` AS teacher_Subject,
+     teacher.`NoOfBooks` AS teacher_NoOfBooks
+FROM
+     `teacher` teacher
+WHERE
+     teacher.`NoOfBooks` = 0]]>
+	</queryString>
+	<field name="teacher_TmemberID" class="java.lang.String"/>
+	<field name="teacher_Fname" class="java.lang.String"/>
+	<field name="teacher_Lname" class="java.lang.String"/>
+	<field name="teacher_Address" class="java.lang.String"/>
+	<field name="teacher_DateOfBirth" class="java.sql.Date"/>
+	<field name="teacher_DateOfRegistration" class="java.sql.Date"/>
+	<field name="teacher_Gender" class="java.lang.String"/>
+	<field name="teacher_Email" class="java.lang.String"/>
+	<field name="teacher_ContactNumber" class="java.lang.Integer"/>
+	<field name="teacher_Subject" class="java.lang.String"/>
+	<field name="teacher_NoOfBooks" class="java.lang.Integer"/>
+	<variable name="count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{teacher_TmemberID}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="da3e6843-11d4-49b7-936b-70131194c352" style="Title" x="270" y="0" width="263" height="62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Member Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4041e09d-18d1-4bb6-bf7b-2e33aa006d22" style="SubTitle" x="270" y="62" width="263" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Teachers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4041e09d-18d1-4bb6-bf7b-2e33aa006d22" style="SubTitle" x="1" y="102" width="341" height="22"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[ Teachers Who Have Not Borrowed Books]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="bbcc76cb-3f70-4a3d-8ccd-2342b06f450a" x="650" y="12" width="151" height="119"/>
+				<imageExpression><![CDATA["F:\\Final 111\\final pro\\systemfinal\\Library_Management_System\\src\\Report\\Picture1.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="73df704f-2e6e-4293-872c-a6146fb83887" positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="1039bab4-43a2-4636-aeb5-5f463f320b41" style="Column header" x="0" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Member ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9ac997b-e829-49cb-b5d8-8e6efa5fb75c" style="Column header" x="72" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Fname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5cb1e45c-0fb6-41e0-be1a-6950b79a51d5" style="Column header" x="144" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Lname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f2cbc3a4-5cb2-4abc-a4c0-f8c3bc61e99d" style="Column header" x="216" y="0" width="72" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ffb3e3fa-1091-4e7c-97fd-d7bcfcbf4049" style="Column header" x="288" y="0" width="85" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Date Of Birth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e8b27085-dab6-4851-a694-cf78ea73f25d" style="Column header" x="373" y="0" width="82" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[DateOfRegistration]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ecb1283-a232-42b6-94a5-31e63dd6683d" style="Column header" x="455" y="0" width="49" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e54ce9bd-de8b-424c-9771-d149dc5245f2" style="Column header" x="504" y="0" width="86" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="34830a24-4ce1-47f3-85d2-33a84a1b4529" style="Column header" x="590" y="0" width="92" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Contact Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1277259b-2add-417d-bbe5-f4b5292ebd1f" style="Column header" x="682" y="0" width="53" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Subject]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd4e0ea2-f46c-45b2-949d-17f13a2517a4" style="Column header" x="735" y="0" width="67" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[NoOfBooks]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="4f6815b7-aeff-4aea-a951-965a45b45d2c" style="Row" mode="Opaque" x="0" y="0" width="802" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="324da7e7-eda5-4867-be16-9af85501aa6a" style="Detail" x="0" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_TmemberID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="9833b51c-59b8-4942-bba5-4f4bf8497d64" style="Detail" x="72" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_Fname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="6ea5ae49-845e-4d6e-bdc4-c182a9b06c60" style="Detail" x="144" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_Lname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="02204df3-005d-4bf1-9c88-df000500a45c" style="Detail" x="216" y="0" width="72" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_Address}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="96d78fd6-eb9e-4943-9d5e-19e63031d76e" style="Detail" x="288" y="0" width="85" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy/MM/dd").format($F{teacher_DateOfBirth})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="81c2463a-3f89-4282-b10f-c20b8a7b5270" style="Detail" x="373" y="0" width="82" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy/MM/dd").format($F{teacher_DateOfRegistration})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="40f0ea03-3a73-46bd-b302-dbec332098b4" style="Detail" x="455" y="0" width="49" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_Gender}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7903de92-3f65-4193-8640-094a25ce098b" style="Detail" x="504" y="0" width="86" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_Email}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="796d8d15-9cdb-453f-8e37-1129050d4b77" style="Detail" x="590" y="0" width="92" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_ContactNumber}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="bc1592f0-6a7f-4407-8fed-5da26d2f0ab1" style="Detail" x="682" y="0" width="53" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_Subject}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c5acd7fe-dd2c-4611-af7f-45dfdb923589" style="Detail" x="735" y="0" width="67" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teacher_NoOfBooks}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement uuid="f077ebec-4ef7-44cd-ab9f-d4703254d2d5" positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="da45dd77-0157-4a8a-820a-206aab0eaffc" mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="cdf92189-7ed5-4270-941c-14bb495c0a51" style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="094133ce-9928-4e84-b8fd-dcc2e90a0206" style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="c1d64601-b031-45fa-adba-d7c90c07a249" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4efc1c14-fe7e-4cd8-9500-d6a94fe9670a" x="504" y="0" width="193" height="25" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Number of Teachers =]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7a7ef836-37af-4949-bc6e-e7eab0fb186d" x="697" y="0" width="100" height="25" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

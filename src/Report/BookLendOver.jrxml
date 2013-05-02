@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BookLendAll" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="84f65413-877f-4f20-bc44-7e1d8ef02ce7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="DOF" class="java.lang.String"/>
+	<parameter name="DOT" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     borrow.`refno` AS borrow_refno,
+     borrow.`memberid` AS borrow_memberid,
+     borrow.`bookid` AS borrow_bookid,
+     borrow.`borrowdate` AS borrow_borrowdate,
+     borrow.`duedate` AS borrow_duedate,
+     borrow.`statues` AS borrow_statues,
+     borrow.`returneddate` AS borrow_returneddate,
+     borrow.`latedays` AS borrow_latedays,
+     borrow.`fineammount` AS borrow_fineammount
+FROM
+     `borrow` borrow
+WHERE
+     borrow.`duedate` < CURDATE() and statues = 'Borrowed'  and borrowdate between $P{DOF} and $P{DOT}]]>
+	</queryString>
+	<field name="borrow_refno" class="java.lang.Integer"/>
+	<field name="borrow_memberid" class="java.lang.String"/>
+	<field name="borrow_bookid" class="java.lang.String"/>
+	<field name="borrow_borrowdate" class="java.sql.Date"/>
+	<field name="borrow_duedate" class="java.sql.Date"/>
+	<field name="borrow_statues" class="java.lang.String"/>
+	<field name="borrow_returneddate" class="java.sql.Date"/>
+	<field name="borrow_latedays" class="java.lang.Integer"/>
+	<field name="borrow_fineammount" class="java.lang.Double"/>
+	<variable name="Count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{borrow_refno}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="cd513518-6b93-4d8e-a800-02890decd471" style="Title" x="270" y="0" width="263" height="62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Book Lend Records]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b386f7ae-46ee-453d-abd9-23360ca91802" style="SubTitle" x="0" y="62" width="267" height="22"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Over Due Book Lend Records]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="038f9d9c-d66f-435b-a4b4-451c28208f02" x="1" y="103" width="266" height="20" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Between "+
+$P{DOF}+
+" and "+
+$P{DOT}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="bbcc76cb-3f70-4a3d-8ccd-2342b06f450a" x="638" y="10" width="151" height="119"/>
+				<imageExpression><![CDATA["F:\\Final 111\\final pro\\systemfinal\\Library_Management_System\\src\\Report\\Picture1.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="bd4ffb0f-6ad9-46a8-860d-4bfa27fefeed" positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="6ca421c5-4d7e-4ad1-a018-90fbd2fc022e" style="Column header" x="0" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Ref No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="05f1c76c-9b21-4432-bf83-950c3e40675f" style="Column header" x="89" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Memberid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="624efe68-acee-46a7-9d3c-a8458913e1db" style="Column header" x="178" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Bookid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e2452b2c-0f95-4822-bdef-8f477d202508" style="Column header" x="267" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Borrow Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cba536f5-e711-4b56-9e12-498487c13639" style="Column header" x="356" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Due Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7fbe84c7-2d15-47b7-a66d-3012f73a37ad" style="Column header" x="445" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Statues]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="386d4a6c-ebe9-4389-8b44-f713e5137272" style="Column header" x="534" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Returned Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fe1f0ed6-ec05-4a66-8ba2-1a9ec6bcf1e9" style="Column header" x="623" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Late Days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59e3192f-3bf0-43ec-a353-72e03978f448" style="Column header" x="712" y="0" width="89" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Fine Ammount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="887c5a73-00d0-4ea5-9349-eb399fa7b229" style="Row" mode="Opaque" x="0" y="0" width="802" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="de4b8a9a-d9fd-47ee-b22d-70269ddfa090" style="Detail" x="0" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{borrow_refno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d4701ac6-1c65-4de7-b49e-882e44405e79" style="Detail" x="89" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{borrow_memberid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="694c71fe-cf8f-4660-b7e6-5e1bceaec81c" style="Detail" x="178" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{borrow_bookid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1e4452ae-7244-4931-b2c0-17ddfcbf1293" style="Detail" x="267" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy/MM/dd").format($F{borrow_borrowdate})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="9bfa4f66-feac-4328-b5d0-402b5b47f207" style="Detail" x="356" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy/MM/dd").format($F{borrow_duedate})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0f23a7d7-5b83-4f41-b228-f37ea3bc5582" style="Detail" x="445" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{borrow_statues}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ddeb19d1-4478-4c72-a520-8265da7bd8b8" style="Detail" x="534" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy/MM/dd").format($F{borrow_returneddate})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="52d19c75-edb7-4ab0-a0ae-9a70a06f8975" style="Detail" x="623" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{borrow_latedays}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a04dcc7d-092f-4900-aa82-f526e32eef8c" style="Detail" x="712" y="0" width="89" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{borrow_fineammount}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement uuid="666afab2-87c3-4d9d-bb63-c07997548950" positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="82d033e0-7ea5-4ade-8b8c-8c0278569401" mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="b8063c56-fef7-4b1f-8113-2ea208971212" style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="9e0da9be-8233-4c33-82d4-257a3e60d7c1" style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="53f7c06b-62dc-4aac-b826-b00fb8206e25" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b386f7ae-46ee-453d-abd9-23360ca91802" style="SubTitle" x="504" y="3" width="225" height="22"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Total Book Lend Records]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9245b546-92f2-47f7-987b-35d681fcdeba" x="734" y="3" width="100" height="22" forecolor="#736343"/>
+				<textElement>
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
